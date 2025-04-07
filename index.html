@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prediksi Harga Beli Tanah di Kota Bandung</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Prediksi Harga Beli Tanah di Kota Bandung</h1>
+    <form id="prediksiForm">
+      <label for="panjang">Panjang Tanah (m)</label>
+      <input type="number" id="panjang" min="1" required />
+
+      <label for="lebar">Lebar Tanah (m)</label>
+      <input type="number" id="lebar" min="1" required />
+
+      <button type="submit">Hitung Prediksi</button>
+    </form>
+    <div id="hasilPrediksi" class="result"></div>
+  </div>
+
+  <script>
+    const dataContohHarga = [{ hargaPerMeter: 7 }];
+
+    document.getElementById('prediksiForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const panjang = parseFloat(document.getElementById('panjang').value);
+      const lebar = parseFloat(document.getElementById('lebar').value);
+
+      if (panjang > 0 && lebar > 0) {
+        const luas = panjang * lebar;
+        let hargaPerMeter = 7;
+
+        const harga = luas * hargaPerMeter;
+        const hargaRounded = Math.round(harga * 100) / 100;
+
+        const hasilElement = document.getElementById('hasilPrediksi');
+        hasilElement.style.display = 'block';
+        hasilElement.innerHTML = `
+          <h3>Hasil Prediksi</h3>
+          <p>Luas tanah: <strong>${luas} m²</strong></p>
+          <p>Harga per meter: <strong>Rp ${hargaPerMeter} juta</strong></p>
+          <p>Total harga prediksi: <strong>Rp ${hargaRounded} juta</strong></p>
+          <p><em>Catatan: Prediksi ini berdasarkan estimasi rata-rata harga di Bandung.</em></p>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>
